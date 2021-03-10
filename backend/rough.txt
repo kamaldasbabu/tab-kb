@@ -1,0 +1,20 @@
+getRestaurants(){
+    this.http.get<{restaurants:any}>(this.url)
+      // .pipe(map((resData) => {
+      //   return resData.restaurants.map(res => {
+      //     return { 
+
+      //       resId: res.resId,
+      //       resName: res.resName,
+      //       resAddress: res.resAddress,
+      //       id: res._id
+          
+      //     }
+      //   })
+      // }))
+      .subscribe((transformRes)=> {
+        this.restaurantt = transformRes;
+        console.log(transformRes);
+        this.updatedRestaurant.next([...this.restaurantt]);
+      })
+  }
