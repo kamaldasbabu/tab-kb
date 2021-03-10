@@ -4,6 +4,7 @@ const resRouter = express.Router();
 const Res = require('../model/restaurant');
 var jwt = require('jsonwebtoken');
 
+
 resRouter.get('/allrestaurants', async (req, res, next)=> {
     try {
         const allrestaurant = await Res.find();
@@ -28,6 +29,10 @@ resRouter.post('/newres', async (req, res, next)=> {
             res.status(200).json({data: doc, msg:'Order Placed'})
         }
     });
+    resRouter.get('/:resId', async(req, res, next)=> {
+        const restaurantId = await Res.find(req.param.resId);
+        res.json(restaurantId);
+    })
     
     resRouter.delete('/deleteres/:id', async(req, res)=> {
         const restaurant = await Res.findOneAndDelete(req.param.id);
